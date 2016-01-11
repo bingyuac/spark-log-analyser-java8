@@ -1,17 +1,18 @@
 package com.databricks.apps.logs.chapter1;
 
-import com.databricks.apps.logs.ApacheAccessLog;
+import java.util.List;
 
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.DataFrame;
-import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SQLContext;
+
+import com.databricks.apps.logs.ApacheAccessLog;
 
 import scala.Tuple2;
-
-import java.util.List;
+import scala.Tuple3;
 
 /**
  * LogAnalyzerSQL shows how to use SQL syntax with Spark.
@@ -80,6 +81,30 @@ public class LogAnalyzerSQL {
         .collect();
     System.out.println(String.format("Top Endpoints: %s", topEndpoints));
 
+
+    // Top IP addresses
+    List<Tuple2<String, Long>> topAddresses = sqlContext
+        .sql("SELECT ipAddress, COUNT(*) AS total FROM logs GROUP BY ipAddress ORDER BY total DESC LIMIT 10")
+        .javaRDD()
+        .map(row -> new Tuple2<>(row.getString(0), row.getLong(1)))
+        .collect();
+    System.out.println(String.format("Top Endpoints: %s", topAddresses));
+
+    
+    // Any IPAddress that has accessed the server more than 10 times.
+    List<Tuple3<String, String, Long>> ipAddressesByTime = sqlContext
+        .sql("SELECT ipAddress, dateTimeHour, COUNT(*) AS total FROM logs WHERE ipAddress <> '192.33.215.254' GROUP BY ipAddress, dateTimeHour")
+        .javaRDD()
+        .map(row ->  new Tuple3<>(row.getString(0), row.getString(1), row.getLong(2)))
+        .collect();
+    
+    ipAddressesByTime.sort((t1, t2) -> t1._2().compareTo(t2._2()));
+    //another option would be to do:
+    //.sql("SELECT ipAddress, dateTimeHour, COUNT(*) AS total FROM logs GROUP BY ipAddress, dateTimeHour ORDER BY dateTimeHour")
+    // but it is way too much slow
+    
+    ipAddressesByTime.stream().forEach(tuple -> System.out.println(tuple._2()));
+    
     sc.stop();
   }
 }

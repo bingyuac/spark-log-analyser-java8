@@ -18,7 +18,17 @@ public class ApacheAccessLog implements Serializable {
   private String clientIdentd;
   private String userID;
   private String dateTimeString;
-  private String method;
+  private String dateTimeHour;
+
+  public String getDateTimeHour() {
+	return dateTimeHour;
+}
+
+public void setDateTimeHour(String dateTimeHour) {
+	this.dateTimeHour = dateTimeHour;
+}
+
+private String method;
   private String endpoint;
   private String protocol;
   private int responseCode;
@@ -32,6 +42,7 @@ public class ApacheAccessLog implements Serializable {
     this.clientIdentd = clientIdentd;
     this.userID = userID;
     this.dateTimeString = dateTime;
+    this.dateTimeHour = dateTime.substring(0, 17);
     this.method = method;
     this.endpoint = endpoint;
     this.protocol = protocol;

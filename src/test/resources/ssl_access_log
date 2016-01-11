@@ -18797,3 +18797,4 @@
 192.33.215.254 - - [11/Jan/2016:15:59:53 +0100] "GET //jsondoc HTTP/1.1" 200 139842 "https://api.nextprot.org/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"
 192.33.215.254 - - [11/Jan/2016:15:59:53 +0100] "GET /favicon.ico HTTP/1.1" 404 312 "https://api.nextprot.org/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"
 192.33.215.254 - - [11/Jan/2016:16:00:21 +0100] "GET /autocomplete/entry.json?query=insulin HTTP/1.1" 200 596 "-" "Mozilla/5.0 (X11; Linux i686; rv:8.0) Gecko/20100101 Firefox/8.0"
+192.33.215.250 - - [11/Jan/2016:16:00:21 +0100] "GET /autocomplete/entry.json?query=insulin HTTP/1.1" 200 596 "-" "Mozilla/5.0 (X11; Linux i686; rv:8.0) Gecko/20100101 Firefox/8.0"
