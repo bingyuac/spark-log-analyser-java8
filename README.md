@@ -9,7 +9,13 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home
 ## Run the job
 
 ```
-spark-submit  --class "com.databricks.apps.logs.chapter1.LogAnalyzer" --master local[4] target/log-analyser-0.0.1-SNAPSHOT.jar src/test/resources/ssl_access_log
+mvn package 
+```
+
+## Run the job
+
+```
+spark-submit  --class "com.databricks.apps.logs.chapter1.LogAnalyzer" --master local[4] target/log-analyzer-1.0.jar src/test/resources/ssl_access_log 
 ```
 
 # Reference

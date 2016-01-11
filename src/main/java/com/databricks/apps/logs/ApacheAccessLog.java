@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
  * This class represents an Apache access log line.
  * See http://httpd.apache.org/docs/2.2/logs.html for more details.
  */
-@SuppressWarnings("serial")
 public class ApacheAccessLog implements Serializable {
   private static final Logger logger = Logger.getLogger("Access");
 
@@ -37,7 +36,7 @@ public class ApacheAccessLog implements Serializable {
     this.endpoint = endpoint;
     this.protocol = protocol;
     this.responseCode = Integer.parseInt(responseCode);
-    this.contentSize = contentSize.equals("-") ? 0L : Long.parseLong(contentSize);
+    this.contentSize = "-".equals(contentSize) ? 0 : Long.parseLong(contentSize);
   }
 
   public String getIpAddress() {

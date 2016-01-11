@@ -23,7 +23,6 @@ import java.util.List;
  *     target/log-analyzer-1.0.jar
  *     ../../data/apache.accesslog
  */
-@SuppressWarnings("serial")
 public class LogAnalyzer {
   private static Function2<Long, Long, Long> SUM_REDUCER = (a, b) -> a + b;
 
@@ -96,3 +95,4 @@ public class LogAnalyzer {
     sc.stop();
   }
 }
+
